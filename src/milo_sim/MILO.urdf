@@ -1,0 +1,256 @@
+<?xml version="1.0"?>
+<robot name="Milo">
+
+  <material name="purple">
+    <color rgba="0.835 0.510 1 1"/>
+  </material>
+  <material name="white">
+    <color rgba="0.941 0.941 0.941 1"/>
+  </material>
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+  <material name="gray">
+    <color rgba="0.6 0.6 0.6 1"/>
+  </material>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.52 0.52 0.25"/>
+      </geometry>
+      <origin xyz="0 0 0.125"/>
+      <!-- ... <material name="purple"/> -->
+    </visual>
+    <inertial>
+      <mass value="2.0"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.02" iyy="0.02" izz="0.02" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+    <collision>
+      <geometry>
+        <box size="0.52 0.52 0.25"/>
+      </geometry>
+      <origin xyz="0 0 0.125"/>
+    </collision>
+  </link>
+
+  <link name="lidar_link">
+    <visual>
+      <geometry>
+        <cylinder radius="0.0275" length="0.0413"/>
+      </geometry>
+      <origin xyz="0 0 0.02065"/>
+      <!-- ... <material name="white"/> -->
+    </visual>
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.001" iyy="0.001" izz="0.001" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+    <collision>
+      <geometry>
+        <cylinder radius="0.0275" length="0.0413"/>
+      </geometry>
+      <origin xyz="0 0 0.02065"/>
+    </collision>
+  </link>
+
+  <link name="left_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <!-- ... <material name="black"/> -->
+    </visual>
+    <inertial>
+      <mass value="0.5"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.001" iyy="0.001" izz="0.001" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+    <collision>
+      <geometry>
+        <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+    </collision>
+  </link>
+
+  <link name="right_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <!-- ... <material name="black"/> -->
+    </visual>
+    <inertial>
+      <mass value="0.5"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.001" iyy="0.001" izz="0.001" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+    <collision>
+      <geometry>
+        <cylinder radius="0.1" length="0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+    </collision>
+  </link>
+
+  <link name="front_left_caster">
+    <visual>
+      <geometry>
+        <sphere radius="0.025"/> 
+      </geometry>
+      <origin xyz="0.13 0.12 -0.025"/>
+      <!-- ... <material name="gray"/> -->
+    </visual>
+    <inertial>
+      <mass value="0.05"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.0001" iyy="0.0001" izz="0.0001" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+    <collision>
+      <geometry>
+        <sphere radius="0.025"/>
+      </geometry>
+      <origin xyz="0.13 0.12 -0.025"/>
+    </collision>
+  </link>
+
+  <link name="front_right_caster">
+    <visual>
+      <geometry>
+        <sphere radius="0.025"/>
+      </geometry>
+      <origin xyz="0.13 -0.12 -0.025"/>
+      <!-- ... <material name="gray"/> -->
+    </visual>
+    <inertial>
+      <mass value="0.05"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.0001" iyy="0.0001" izz="0.0001" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+    <collision>
+      <geometry>
+        <sphere radius="0.025"/>
+      </geometry>
+      <origin xyz="0.13 -0.12 -0.025"/>
+    </collision>
+  </link>
+
+  <joint name="base_lidar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_link"/>
+    <origin xyz="0.24 0 0.25"/>
+  </joint>
+
+  <joint name="base_front_left_caster_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="front_left_caster"/>
+    <origin xyz="0.095 0.10 0"/>
+  </joint>
+
+  <joint name="base_front_right_caster_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="front_right_caster"/>
+    <origin xyz="0.095 -0.10 0"/>
+  </joint>
+
+  <joint name="base_left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="left_wheel"/>
+    <origin xyz="-0.2 0.27 0.05"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <joint name="base_right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="right_wheel"/>
+    <origin xyz="-0.2 -0.27 0.05"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <gazebo reference="lidar_link">
+	  <sensor type="ray" name="milo_lidar">
+	    <always_on>true</always_on>
+	    <update_rate>10</update_rate>
+	    <visualize>true</visualize>
+	    <pose>0 0 0 0 0 0</pose>
+
+	    <ray>
+	      <scan>
+		<horizontal>
+		  <samples>720</samples>
+		  <resolution>1</resolution>
+		  <min_angle>-1.5708</min_angle>
+		  <max_angle>1.5708</max_angle>
+		</horizontal>
+	      </scan>
+	      <range>
+		<min>0.12</min>
+		<max>8.0</max>
+		<resolution>0.01</resolution>
+	      </range>
+	      <noise>
+		<type>gaussian</type>
+		<mean>0.0</mean>
+		<stddev>0.01</stddev>
+	      </noise>
+	    </ray>
+
+	    <plugin name="gazebo_ros_laser" filename="libgazebo_ros_ray_sensor.so">
+	      <ros>
+		<namespace>/</namespace>
+		<remapping>~/out:=/scan</remapping>
+	      </ros>
+	      <output_type>sensor_msgs/LaserScan</output_type>
+	      <frame_name>lidar_link</frame_name>
+	    </plugin>
+	  </sensor>
+	</gazebo>
+
+
+	<gazebo>
+		<plugin name="milo_diff_drive" filename="libgazebo_ros_diff_drive.so">
+		  <ros>
+		    <remapping>cmd_vel:=/cmd_vel</remapping>
+		    <remapping>odom:=/odom</remapping>
+		  </ros>
+		  <update_rate>50</update_rate>
+		  <left_joint>base_left_wheel_joint</left_joint>
+		  <right_joint>base_right_wheel_joint</right_joint>
+		  <wheel_separation>0.54</wheel_separation>
+		  <wheel_diameter>0.2</wheel_diameter>
+		  <odometry_frame>odom</odometry_frame>
+		  <robot_base_frame>base_link</robot_base_frame>
+		  <publish_odom>true</publish_odom>
+		  <publish_odom_tf>true</publish_odom_tf> 
+		  <use_stamped_vel>true</use_stamped_vel>
+
+		  <!-- Parámetros dinámicos -->
+		  <max_wheel_torque>15</max_wheel_torque>
+		  <command_timeout>1.0</command_timeout>
+		</plugin>
+	</gazebo>
+  <gazebo reference="base_link">
+  	<material>Gazebo/Red</material>
+  </gazebo>
+  <gazebo reference="left_wheel">
+  	<material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="right_wheel">
+  	<material>Gazebo/Black</material>
+  </gazebo>
+  <gazebo reference="front_left_caster">
+  	<material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="front_right_caster">
+  	<material>Gazebo/Grey</material>
+  </gazebo>
+  <gazebo reference="lidar_link">
+  	<material>Gazebo/Green</material>
+  </gazebo>
+
+</robot>

@@ -1,0 +1,105 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="milo_maze">
+    <!-- Suelo y luz -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <model name="wall_north">
+      <pose>0 3 0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>6 0.1 1.5</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>6 0.1 1.5</size></box></geometry>
+          <material><ambient>0.7 0.7 0.7 1</ambient></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_south">
+      <pose>0 -3 0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>6 0.1 1.5</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>6 0.1 1.5</size></box></geometry>
+          <material><ambient>0.7 0.7 0.7 1</ambient></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_east">
+      <pose>3 0 0 0 0 1.57</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>6 0.1 1.5</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>6 0.1 1.5</size></box></geometry>
+          <material><ambient>0.7 0.7 0.7 1</ambient></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_west">
+      <pose>-3 0 0 0 0 1.57</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>6 0.1 1.5</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>6 0.1 1.5</size></box></geometry>
+          <material><ambient>0.7 0.7 0.7 1</ambient></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_inner1">
+      <pose>-1.5 0 0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>3 0.1 1.5</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>3 0.1 1.5</size></box></geometry>
+          <material><ambient>0.3 0.3 0.9 1</ambient></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_inner2">
+      <pose>0 1.5 0 0 0 1.57</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>3 0.1 1.5</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>3 0.1 1.5</size></box></geometry>
+          <material><ambient>0.3 0.9 0.3 1</ambient></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_inner3">
+      <pose>1.5 -1.5 0 0 0 1.57</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>2 0.1 1.5</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>2 0.1 1.5</size></box></geometry>
+          <material><ambient>0.9 0.9 0.3 1</ambient></material>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>
+
